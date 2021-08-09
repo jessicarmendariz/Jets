@@ -8,7 +8,7 @@ public class CargoPlane extends JetsEntities{
 	}
 	
 	public void loadCargo() {
-		System.out.println(super.getModel() + " is loading gear");
+		System.out.println(super.getModel() + " is prepared to accept Paratroopers! Airborne!");
 				
 }
 }

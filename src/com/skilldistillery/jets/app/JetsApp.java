@@ -6,6 +6,7 @@ import com.skilldistillery.jets.entities.AirField;
 
 import java.util.InputMismatchException;
 import java.util.List;
+import java.io.File;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -54,21 +55,24 @@ public class JetsApp {
 				viewFastestJets(jets);
 				break;
 			case 4:
-				viewJetsWithLongestRange(jets);
+				viewMachSpeed(jets);
 				break;
 			case 5:
-				loadAllCargoJets(jets);
+				viewJetsWithLongestRange(jets);
 				break;
 			case 6:
-				dogFight(jets);
+				loadAllCargoJets(jets);
 				break;
 			case 7:
-				addJetToFleet();
+				dogFight(jets);
 				break;
 			case 8:
-				removeAJetFromFleet(jets);
+				addJetToFleet();
 				break;
 			case 9:
+				removeAJetFromFleet(jets);
+				break;
+			case 10:
 				quit = true;
 				System.out.println("Thanks for Flying with Us!");
 				break;
@@ -81,21 +85,25 @@ public class JetsApp {
 	}
 	
 	private void displayMenu() {
+		System.out.println("");
 		System.out.println("|>>-->>-->>-->>-->>-- MENU --<<--<<--<<--<<--<<|");
-		System.out.println("1) List Fleet");
-		System.out.println("2) Fly All Jets");
-		System.out.println("3) View Fastest Jet");
-		System.out.println("4) View Jet with Longest Combat Range");
-		System.out.println("5) Load All Cargo Planes");
-		System.out.println("6) DOGFIGHT!");
-		System.out.println("7) Add Jet");
-		System.out.println("8) Remove Jet");
-		System.out.println("9) Quit");
+		System.out.println("     1) List Fleet");
+		System.out.println("     2) Fly All Jets");
+		System.out.println("     3) View Fastest Jet");
+		System.out.println("     4) View Fastest Jet in MACH SPEED");
+		System.out.println("     5) View Jet with Longest Combat Range");
+		System.out.println("     6) Load All Cargo Planes");
+		System.out.println("     7) DOGFIGHT!");
+		System.out.println("     8) Add Jet");
+		System.out.println("     9) Remove Jet");
+		System.out.println("     10) Quit");
 		System.out.println("|>>-->>-->>-->>-->>-->>--<<--<<--<<--<<--<<--<<|");
+		System.out.println("");
 	}
 	
 	private void addInitialJets() {
-		try (BufferedReader br = new BufferedReader(new FileReader("Jets.txt"))) {
+		File f = new File("FightOrFlight.txt");
+		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] info = line.split("\t");
@@ -113,15 +121,16 @@ public class JetsApp {
 	}
 
 	private void listFleet(List<JetsEntities> jets) {
-		System.out.println("Fleet");
+		System.out.println("Current Fleet");
 		for (JetsEntities jet : jets) {
 			System.out.println(jet);
 		}
 	}
 	
 	private void flyAllJets(List<JetsEntities> jets) {
-		System.out.println("Jets FLying");
+		System.out.println("How Long Can They Fly?");
 		for (JetsEntities jet : jets) {
+			jet.fly();
 		}
 	}
 	
@@ -138,6 +147,21 @@ public class JetsApp {
 			}
 		}
 	}
+	
+	private void viewMachSpeed(List<JetsEntities> jets) {
+		double machSpeed = Double.MIN_VALUE;
+		for(JetsEntities jet : jets) {
+			if (jet.getMachSpeed() > machSpeed) {
+				machSpeed = jet.getMachSpeed();
+			}
+		}
+		for (JetsEntities jet : jets) {
+			if (jet.getMachSpeed() == machSpeed) {
+				System.out.println(jet.getModel() + " has a mach speed of " + jet.getMachSpeed() + "M");
+			}
+		}
+	}
+	
 	
 	private void viewJetsWithLongestRange(List<JetsEntities> jets) {
 		double range = Integer.MIN_VALUE;
@@ -164,10 +188,11 @@ public class JetsApp {
 	}
 	
 	private void dogFight(List<JetsEntities> jets) {
-		System.out.println("Jets Entering Combat");
+		System.out.println("Jets Entering Simulation");
 		for (JetsEntities jet : jets) {
 			if (jet.getClass().getSimpleName().equals("FighterJet")) {
 				FighterJet fighter = (FighterJet) jet;
+				fighter.fight();
 			}
 		}
 	}

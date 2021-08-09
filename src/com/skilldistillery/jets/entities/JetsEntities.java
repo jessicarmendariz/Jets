@@ -15,7 +15,7 @@ public abstract class JetsEntities {
 	}
 	
 	public void fly() {
-		System.out.println(this.model + " has a maximum speed of " + this.speed + " and a combat range of " + this.range + " can fly for " + (Math.round((this.range/this.speed) * 10) / 10.0) + " hours at a time.");
+		System.out.println(this.model + " has a maximum speed of " + this.speed + "MPH and a combat range of " + this.range + " miles. " + this.model+ " can fly for " + (Math.round((this.range/this.speed) * 10) / 10.0) + " hours at a time.");
 	}
 	
 	public double getMachSpeed() {
@@ -55,7 +55,7 @@ public abstract class JetsEntities {
 	}
 	
 	public String toString() {
-		return "Jet [model=" + model + ", speed=" + speed + ",range=" + range + ", price=" + price + "]";
+		return "Model= " + model + ", Speed= " + speed + ",Range= " + range + ", Price= " + price + "]";
 	}
 
 }

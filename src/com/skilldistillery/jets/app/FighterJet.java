@@ -8,6 +8,6 @@ public class FighterJet extends JetsEntities {
 	}
 	
 	public void fight() {
-		System.out.println(super.getModel() + " fit to fight!");
+		System.out.println(super.getModel() + " FOX2, Fight's On!");
 	}
 }
