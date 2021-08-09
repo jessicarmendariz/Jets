@@ -74,7 +74,7 @@ public class JetsApp {
 				break;
 			case 10:
 				quit = true;
-				System.out.println("Thanks for Flying with Us!");
+				System.out.println("Thanks for Flying with Armendariz Airways!");
 				break;
 			default:
 				System.err.println("Invalid Entry. Please Choose from the Menu.");
